@@ -31,7 +31,11 @@ Chỉnh sửa file `.env`:
 
 ```env
 # Server Configuration
-PORT=3000
+PORT=3120
+
+# Port Configuration for Docker Deployment
+HOST_PORT=3121
+CONTAINER_PORT=3122
 
 # GitHub Webhook Configuration
 WEBHOOK_SECRET=your-github-webhook-secret
@@ -67,7 +71,7 @@ npm start
 ## Cấu hình GitHub Webhook
 
 1. Vào GitHub repository → Settings → Webhooks
-2. Add webhook với URL: `http://your-server:3000/webhook`
+2. Add webhook với URL: `http://your-server:3120/webhook`
 3. Content type: `application/json`
 4. Secret: Giống với `WEBHOOK_SECRET` trong `.env`
 5. Events: Chọn "Create" (for tags)

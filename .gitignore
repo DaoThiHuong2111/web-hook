@@ -8,3 +8,5 @@ setup.sh
 .claude/commands/search.md
 .claude/commands/serena.md
 .claude/commands/setCodebase.md
+/.claude
+/.serena

@@ -5,7 +5,9 @@ const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3120;
+const HOST_PORT = process.env.HOST_PORT || 3121;
+const CONTAINER_PORT = process.env.CONTAINER_PORT || 3122;
 
 // Middleware để parse JSON
 app.use(express.json());
@@ -198,7 +200,7 @@ async function runCIProcess(tagName) {
     }
     
     // Run new container
-    await executeCommand(`docker run -d --name ${containerName} -p 3000:3000 ${imageName}`);
+    await executeCommand(`docker run -d --name ${containerName} -p ${HOST_PORT}:${CONTAINER_PORT} ${imageName}`);
     
     console.log('CI process completed successfully!');
     
