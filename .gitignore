@@ -1,0 +1,10 @@
+CLAUDE.md
+setup.sh
+.claude/settings.local.json
+.claude/commands/context7.md
+.claude/commands/getCodebase.md
+.claude/commands/newConvention.md
+.claude/commands/perplexity.md
+.claude/commands/search.md
+.claude/commands/serena.md
+.claude/commands/setCodebase.md
