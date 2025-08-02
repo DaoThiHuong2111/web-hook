@@ -6,6 +6,8 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST_PORT = process.env.HOST_PORT || 3000;
+const CONTAINER_PORT = process.env.CONTAINER_PORT || 3000;
 
 // Middleware để parse JSON
 app.use(express.json());
@@ -197,8 +199,10 @@ async function runCIProcess(tagName) {
       console.log('No existing container to stop');
     }
     
-    // Run new container
-    await executeCommand(`docker run -d --name ${containerName} -p 3000:3000 ${imageName}`);
+    // Run new container with configurable ports
+    await executeCommand(
+      `docker run -d --name ${containerName} -p ${HOST_PORT}:${CONTAINER_PORT} -e PORT=${CONTAINER_PORT} ${imageName}`
+    );
     
     console.log('CI process completed successfully!');
     
