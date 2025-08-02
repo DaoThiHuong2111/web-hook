@@ -22,7 +22,19 @@ const DOCKER_REPO = process.env.DOCKER_REPO || 'your-repo/nextjs-app';
 
 // Project directory - nơi chứa Next.js project
 const PROJECT_DIR = process.env.PROJECT_DIR || '/var/www/nextjs-project';
-const REPO_URL = process.env.REPO_URL;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_REPO = process.env.GITHUB_REPO; // format: owner/repo-name
+
+// Validate required environment variables
+if (!GITHUB_TOKEN) {
+  console.error('GITHUB_TOKEN environment variable is required for private repository access');
+  process.exit(1);
+}
+
+if (!GITHUB_REPO) {
+  console.error('GITHUB_REPO environment variable is required (format: owner/repo-name)');
+  process.exit(1);
+}
 
 // Hàm verify GitHub webhook signature
 function verifyGitHubSignature(payload, signature) {
@@ -116,7 +128,7 @@ async function ensureProjectDirectory() {
       
       // Clone repository lần đầu
       console.log('Cloning repository lần đầu...');
-      await executeCommand(`git clone ${REPO_URL} ${PROJECT_DIR}`);
+      await executeCommand(`git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO} ${PROJECT_DIR}`);
     }
     return true;
   } catch (error) {
